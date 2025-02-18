@@ -8,20 +8,16 @@ header("Access-Control-Allow-Headers: Content-Type");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require 'vendor/autoload.php'; // Include Composer autoload
+//require 'vendor/autoload.php'; // Include Composer autoload
+require __DIR__ . '/../../vendor/autoload.php';
+
 
 use MongoDB\Client;
 
 // MongoDB connection
 $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
-
-try{
-    $client = new Client($mongoUri);
-    $collection = $client->animalrescue->surrenders;
-}catch(Exception $e){
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed', 'error' => $e->getMessage()]);
- exit();
- }
+$client = new Client($mongoUri);
+$collection = $client->animalrescue->surrenders;
 
 
 // Get form data
