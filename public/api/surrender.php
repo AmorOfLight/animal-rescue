@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//require 'vendor/autoload.php'; // Include Composer autoload
+require 'vendor/autoload.php'; // Include Composer autoload
 
 use MongoDB\Client;
 
