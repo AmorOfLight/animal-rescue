@@ -11,7 +11,7 @@ use MongoDB\Client;
 // MongoDB connection
 $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
 $client = new Client($mongoUri);
-$collection = $client->animal_shelter->adoptions;
+$collection = $client->animalrescue->adoptions;
 
 // Get form data
 $data = json_decode(file_get_contents("php://input"), true);

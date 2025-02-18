@@ -17,7 +17,7 @@ $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b502
 
 try{
     $client = new Client($mongoUri);
-    $collection = $client->animal_shelter->surrenders;
+    $collection = $client->animalrescue->surrenders;
 }catch(Exception $e){
     echo json_encode(['status' => 'error', 'message' => 'Database connection failed', 'error' => $e->getMessage()]);
  exit();
