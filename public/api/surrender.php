@@ -24,14 +24,28 @@ $collection = $client->animalrescue->surrenders;
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $uploadPath = ''; // Initialize the upload path
+
+    if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = 'uploads/'; // Directory to store uploaded files
+        $uploadPath = $uploadDir . basename($_FILES['upload']['name']);
+
+        if (!move_uploaded_file($_FILES['upload']['tmp_name'], $uploadPath)) {
+            // Handle upload error
+            echo json_encode(['error' => 'File upload failed']);
+            exit;
+        }
+    }
+
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'upload' => $data['upload'], // Store file path or URL
-        'animalType' => $data['animalType'],
-        'breed' => $data['breed'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'location' => $data['location'],
+        'upload' => $uploadPath, // Store file path or URL
+        'animalType' => $_POST['animalType'],
+        'breed' => $_POST['breed'],
+        'email' => $_POST['email'],
+        'phone' => $_POST['phone'],
+        'location' => $_POST['location'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 

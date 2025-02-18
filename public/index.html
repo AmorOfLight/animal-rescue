@@ -922,10 +922,10 @@
                     <p>Help us find a new home for your pet</p>
                 </div>
                 
-                <form class="give-animal-form" id="give-animal-form">
+                <form method="post" class="give-animal-form" id="give-animal-form">
                     <div class="photo-upload">
                         <h3>Upload Photos</h3>
-                        <div class="upload-container" id="uploadContainer">
+                        <div class="upload-container" id="upload">
                             <input type="file" id="petPhotos" name="petPhotos" multiple accept="image/*">
                             <label for="petPhotos">
                                 <i class="fas fa-cloud-upload-alt"></i>
@@ -973,7 +973,7 @@
                             <input type="text" id="location" name="location" required placeholder="Your city/town">
                         </div>
 
-                        <button type="submit" class="submit-btn">Submit Form</button>
+                        <input type="submit" class="submit-btn" value="Submit Form" input>
                     </div>
                 </form>
 
@@ -1024,7 +1024,7 @@
                     <p>Your support helps us save more animals in need</p>
                 </div>
                 <div class="donation-container">
-                    <form id="donation-form">
+                    <form method="post" id="donation-form">
                         <!-- Personal Information -->
                         <div class="form-grid">
                            <div class="form-group">
@@ -1201,22 +1201,12 @@
        document.getElementById('give-animal-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const data = {
-      upload: document.getElementById('uploadContainer').value,
-      animal_type: document.getElementById('animalType').value,
-      amount: document.getElementById('amount').value,
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      phone: document.getElementById('phone').value,
-      location: document.getElementById('location').value,
-    };
+    const form = document.getElementById('give-animal-form');
+    const formData = new FormData(form);
 
     fetch('https://plankton-app-2evxj.ondigitalocean.app/api/surrender.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
       .then(response => response.json())
       .then(result => {
