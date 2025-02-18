@@ -1,6 +1,6 @@
 {
     "require": {
-      "mongodb/mongodb": "^1.15",
+      "mongodb/mongodb": "^1.16",
       "phpmailer/phpmailer": "^6.9",
       "stripe/stripe-php": "^16.5"
     }
