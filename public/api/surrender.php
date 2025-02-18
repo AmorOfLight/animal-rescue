@@ -4,14 +4,25 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
+// Enable error reporting (for debugging)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require 'vendor/autoload.php'; // Include Composer autoload
 
 use MongoDB\Client;
 
 // MongoDB connection
-$mongoUri = "mongodb+srv://doadmin:<replace-with-your-password>@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
-$client = new Client($mongoUri);
-$collection = $client->animal_shelter->surrenders;
+$mongoUri = "mongodb+srv://mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
+
+try{
+    $client = new Client($mongoUri);
+    $collection = $client->animal_shelter->surrenders;
+}catch(Exception $e){
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed', 'error' => $e->getMessage()]);
+ exit();
+ }
+
 
 // Get form data
 $data = json_decode(file_get_contents("php://input"), true);
@@ -19,7 +30,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'upload' => $data['uploadContainer'], // Store file path or URL
+        'upload' => $data['upload'], // Store file path or URL
         'animalType' => $data['animalType'],
         'breed' => $data['breed'],
         'email' => $data['email'],
