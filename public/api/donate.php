@@ -15,7 +15,6 @@ use Stripe\PaymentIntent;
 // MongoDB connection
 $mongoUri = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/animal_shelter";
 $client = new Client($mongoUri);
-$database = $client->animalrescue;  // Name of database
 $collection = $client->animal_shelter->donations;
 
 // Stripe configuration

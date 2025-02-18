@@ -859,7 +859,7 @@
                 <ul>
                     <li><a href="index.html" class="nav-link home-link"><i class="fas fa-home"></i>Home</a></li>
                     <li><a href="adopt.html" class="nav-link adopt-link"><i class="fas fa-paw"></i>Adopt</a></li>
-                    <li><a href="shelters.html" class="nav-link shelter-link"><i class="fas fa-house-user"></i>Shelters</a></li>
+                    
              
                     <li><a href="about.html" class="nav-link about-link"><i class="fas fa-info-circle"></i>About Us</a></li>
                 </ul>
@@ -1214,7 +1214,7 @@
       location: document.getElementById('location').value,
     };
 
-    fetch('https://plankton-app-2evxj.ondigitalocean.app/surrender.php', {
+    fetch('https://plankton-app-2evxj.ondigitalocean.app/api/surrender.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1242,7 +1242,7 @@
    amount: document.getElementById('amount').value,
  };
 
- fetch('https://plankton-app-2evxj.ondigitalocean.app/donate.php', {
+ fetch('https://plankton-app-2evxj.ondigitalocean.app/api/donate.php', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json',

@@ -11,8 +11,7 @@ use MongoDB\Client;
 // MongoDB connection
 $mongoUri = "mongodb+srv://doadmin:<replace-with-your-password>@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
 $client = new Client($mongoUri);
-$database = $client->animalrescue;  // Name of database
-$collection = $client->animal_shelter->surrenders;
+$collection = $client->animal_shelter->adoptions;
 
 // Get form data
 $data = json_decode(file_get_contents("php://input"), true);
@@ -20,19 +19,18 @@ $data = json_decode(file_get_contents("php://input"), true);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'upload' => $data['uploadContainer'], // Store file path or URL
-        'animalType' => $data['animalType'],
-        'breed' => $data['breed'],
+        'shelter' => $data['shelter'],
+        'shelter_address' => $data['address'],
+        'name' => $data['applicantName'],
         'email' => $data['email'],
         'phone' => $data['phone'],
-        'location' => $data['location'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
     if ($result->getInsertedCount() === 1) {
-        echo json_encode(['status' => 'success', 'message' => 'Pet surrender submitted']);
+        echo json_encode(['status' => 'success', 'message' => 'Adoption application submitted']);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to submit surrender']);
+        echo json_encode(['status' => 'error', 'message' => 'Failed to submit application']);
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
