@@ -14,16 +14,20 @@ require __DIR__ . '/../../vendor/autoload.php';
 
 use MongoDB\Client;
 
-// MongoDB connection
+// MongoDB connection details
 $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
-$client = new Client($mongoUri);
-$collection = $client->animalrescue->surrenders;
+$databaseName = "animalrescue"; // database name
 
+try{
+    // Connect to MongoDB
+    $client = new Client($mongoUri);
+    $collection = $client->animalrescue->surrenders;
 
-// Get form data
-$data = json_decode(file_get_contents("php://input"), true);
-
+    // Handle only POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Get the raw POST data
+    $data = json_decode(file_get_contents("php://input"), true);
 
     $uploadPath = ''; // Initialize the upload path
 
@@ -54,7 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to submit surrender']);
     }
-} else {
+}else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
+}catch (Exception $e) {
+   /* $response = [
+        'status' => 'error',
+        'message' => 'Database error: ' . $e->getMessage()
+    ];*/
+}
+
 ?>
