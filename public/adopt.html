@@ -813,7 +813,7 @@
             
             // Reset animal selections
             document.getElementById('animalType').value = '';
-            document.getElementById('animalSelect').innerHTML = '<option value="">First select an animal type</option>';
+          //  document.getElementById('animalSelect').innerHTML = '<option value="">First select an animal type</option>';
 
             // Smooth scroll to adoption form
             document.querySelector('.adoption-form').scrollIntoView({ 
@@ -927,7 +927,7 @@
             const animalSelect = document.getElementById('animalSelect');
             
             // Clear current options
-            animalSelect.innerHTML = '<option value="">Select an animal</option>';
+           // animalSelect.innerHTML = '<option value="">Select an animal</option>';
             
             // If a type is selected, populate with corresponding animals
             if (animalType) {
@@ -935,7 +935,7 @@
                     const option = document.createElement('option');
                     option.value = animal;
                     option.textContent = animal;
-                    animalSelect.appendChild(option);
+                  //  animalSelect.appendChild(option);
                 });
             }
         }
