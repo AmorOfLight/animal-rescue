@@ -39,15 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'shelter' =>$shelter, //$data['shelter'],
-        'address' =>$address, //$data['address'],
-        'animalType' =>$type, //$data['animalType'],
-        'breed' =>$breed, //$data['breed'],
-        'visitDate' =>$visit, //$data['visitDate'],
-        'visitTime' =>$time, //$data['visitTime'],
-        'applicantName' =>$name, //$data['applicantName'],
-        'email' =>$email, //$data['email'],
-        'phone' =>$phone, //$data['phone'],
+        'shelter' =>$data['shelter'],
+        'address' =>$data['address'],
+        'animalType' =>$data['animalType'],
+        'breed' =>$data['breed'],
+        'visitDate' =>$data['visitDate'],
+        'visitTime' =>$data['visitTime'],
+        'applicantName' =>$data['applicantName'],
+        'email' =>$email['email'],
+        'phone' =>$data['phone'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
