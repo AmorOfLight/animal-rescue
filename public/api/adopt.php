@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8');
 
     // Validate input
-    if (empty($shelter) || empty($address) || empty($type) || empty($breed) || empty($visit) || empty($time) || empty($name) || empty($email) || empty($phone)) {
+    if ( empty($type) || empty($breed) || empty($visit) || empty($time) || empty($name) || empty($email) || empty($phone)) {
         echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
         exit;
     }
