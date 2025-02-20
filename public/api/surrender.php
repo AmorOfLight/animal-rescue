@@ -24,10 +24,22 @@ try{
     $collection = $client->animalrescue->surrenders;
 
     // Handle only POST requests
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES["petPhotos"])) {
 
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
+
+
+    $image = $_FILES["petPhotos"];
+    $imageData = file_get_contents($image["tmp_name"]); // Read file content
+    // Prepare data for MongoDB
+    $document = [
+        "filename" => $image["petPhotos"],
+        "content_type" => $image["type"],
+        "image_data" => new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC)
+    ];
+
+
 
     // Sanitize input
     $upload = htmlspecialchars($data['petPhotos'],ENT_QUOTES, 'UTF-8');
