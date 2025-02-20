@@ -699,10 +699,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="animalSelect">Select Animal:</label>
-                    <select id="animalSelect" required>
-                        <option value="">First select an animal type</option>
-                    </select>
+                    <label for="breed">Preferred Breed:</label>
+                    <input type="text" id="breed" required>
                 </div>
                 <div class="form-group">
                     <label for="visitDate">Preferred Visit Date:</label>
@@ -868,31 +866,16 @@
     document.getElementById('adoptionForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const data = {
-      shelter: document.getElementById('shelter').value,
-      shelter_address: document.getElementById('address').value,
-      selected_animal: document.getElementById('animalSelect').value,
-      visit_date: document.getElementById('visitDate').value,
-      visit_time: document.getElementById('visitTime').value,
-      name: document.getElementById('applicantName').value,
-      email: document.getElementById('email').value,
-      phone: document.getElementById('phone').value,
-    };
+    const form = document.getElementById('adoptionForm');
+    const formData = new FormData(form);
 
     fetch('https://plankton-app-2evxj.ondigitalocean.app/api/adopt.php', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
       .then(response => response.json())
-      .then(result => {
-        alert(result.message);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+      .then(result => alert(result.message))
+      .catch(error => console.error('Error:', error));
   });
     </script>
 
