@@ -36,12 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
     $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8');
 
-    // Validate input
-    if ( empty($breed) || empty($name) || empty($email) || empty($phone)) {
-        echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
-        exit;
-    }
-
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
