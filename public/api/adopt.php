@@ -1,22 +1,29 @@
 <?php
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://plankton-app-2evxj.ondigitalocean.app");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-require 'vendor/autoload.php'; // Include Composer autoload
+// Include Composer autoload
+require __DIR__ . '/../../vendor/autoload.php';
 
 use MongoDB\Client;
 
 // MongoDB connection
 $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
-$client = new Client($mongoUri);
-$collection = $client->animalrescue->adoptions;
+$databaseName = "animalrescue"; // database name
 
-// Get form data
-$data = json_decode(file_get_contents("php://input"), true);
+
+try{
+    //Connect to MongoDB
+    $client = new Client($mongoUri);
+    $collection = $client->animalrescue->adoptions;
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Get form data
+    $data = json_decode(file_get_contents("php://input"), true);
 
     // Sanitize input
     $shelter = htmlspecialchars($data['shelter'],ENT_QUOTES, 'UTF-8');
@@ -57,5 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
+}
+}catch (Exception $e) {
+    echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
 }
 ?>
