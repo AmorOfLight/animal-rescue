@@ -922,7 +922,7 @@
                     <p>Help us find a new home for your pet</p>
                 </div>
                 
-                <form method="post" class="give-animal-form" id="give-animal-form">
+                <form method="post" class="give-animal-form" id="give-animal-form" onsubmit="return validate(this)">
                     <div class="photo-upload">
                         <h3>Upload Photos</h3>
                         <div class="upload-container" id="upload">
@@ -1244,6 +1244,35 @@
      console.error('Error:', error);
    });
 });
+ </script>
+
+<!--Validation-->
+ <script>
+    function validate(form)
+    {
+        fail = validateName(form.name.value)
+        fail += validateEmail(form.email.value)
+        fail += validatePhone(form.phone.value)
+
+        if (fail == "") return true
+        else {alert(fail); return false}
+    }
+
+    function validateName(field){
+        if (field.length <5) return "Name must be at least 5 characters.\n"
+        else if (/[^a-zA-Z]/.test(field)) return "Only letters and spaces allowed in Name.\n"
+        return ""
+    }
+    function validateEmail(field){
+        if (!((field.indexOf(".") >0) && (field.indexOf("@") >0))||/[^a-zA-Z0-9.@_-]/.test(field))
+        return  "Email address is invalid.\n"
+    return ""
+    }
+    function validatePhone(field){
+        if (field.length <10) return "Number must be at least 10 digits.\n"
+        else if (/[a-zA-Z.@_-]/.test(field)) return "Phone number must be 10-15 digits.\n"
+        return ""
+    }
  </script>
 </body>
 </html>
