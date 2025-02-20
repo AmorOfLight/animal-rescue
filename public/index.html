@@ -973,6 +973,8 @@
                             <input type="text" id="location" name="location" required placeholder="Your city/town">
                         </div>
 
+                        <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo bin2hex(random_bytes(32)); ?>">
+
                         <input type="submit" class="submit-btn" value="Submit Form" input>
                     </div>
                 </form>
@@ -1201,6 +1203,10 @@
        document.getElementById('give-animal-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
+      const fileInput = document.getElementById('petPhotos');
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
     const form = document.getElementById('give-animal-form');
     const formData = new FormData(form);
 
@@ -1209,13 +1215,9 @@
       body: formData,
     })
       .then(response => response.json())
-      .then(result => {
-        alert(result.message);
-      })
-      .catch(error => {
-        console.error('Error:', error);
+      .then(result => alert(result.message))
+      .catch(error => console.error('Error:', error));
       });
-  });
     </script>
 
 <!--To Donate-->
@@ -1244,35 +1246,6 @@
      console.error('Error:', error);
    });
 });
- </script>
-
-<!--Validation-->
- <script>
-    function validate(form)
-    {
-        fail = validateName(form.name.value)
-        fail += validateEmail(form.email.value)
-        fail += validatePhone(form.phone.value)
-
-        if (fail == "") return true
-        else {alert(fail); return false}
-    }
-
-    function validateName(field){
-        if (field.length <5) return "Name must be at least 5 characters.\n"
-        else if (/[^a-zA-Z]/.test(field)) return "Only letters and spaces allowed in Name.\n"
-        return ""
-    }
-    function validateEmail(field){
-        if (!((field.indexOf(".") >0) && (field.indexOf("@") >0))||/[^a-zA-Z0-9.@_-]/.test(field))
-        return  "Email address is invalid.\n"
-    return ""
-    }
-    function validatePhone(field){
-        if (field.length <10) return "Number must be at least 10 digits.\n"
-        else if (/[a-zA-Z.@_-]/.test(field)) return "Phone number must be 10-15 digits.\n"
-        return ""
-    }
  </script>
 </body>
 </html>

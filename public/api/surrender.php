@@ -1,12 +1,12 @@
 <?php
 header("Content-Type: application/json");
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: https://plankton-app-2evxj.ondigitalocean.app");// Restrict to trusted domain
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Enable error reporting (for debugging)
+/* Enable error reporting (for debugging)
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 1);*/
 
 //require 'vendor/autoload.php'; // Include Composer autoload
 require __DIR__ . '/../../vendor/autoload.php';
@@ -29,28 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $uploadPath = ''; // Initialize the upload path
+    // Sanitize input
+    $upload = htmlspecialchars($data['petPhotos'],ENT_QUOTES, 'UTF-8');
+    $type = htmlspecialchars($data['animalType'],ENT_QUOTES, 'UTF-8');
+    $breed = htmlspecialchars($data['breed'], ENT_QUOTES, 'UTF-8');
+    $name = htmlspecialchars($data['name'], ENT_QUOTES, 'UTF-8');
+    $email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
+    $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8'); 
+    $location = htmlspecialchars($data['location'], ENT_QUOTES, 'UTF-8');
 
-    if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'uploads/'; // Directory to store uploaded files
-        $uploadPath = $uploadDir . basename($_FILES['upload']['name']);
-
-        if (!move_uploaded_file($_FILES['upload']['tmp_name'], $uploadPath)) {
-            // Handle upload error
-            echo json_encode(['error' => 'File upload failed']);
-            exit;
-        }
+    // Validate input
+    if (empty($upload) || empty($type) || empty($breed) || empty($name) || empty($email) || empty($phone) || empty($location)) {
+        echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
+        exit;
     }
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'upload' => $uploadPath, // Store file path or URL
-        'animalType' => $_POST['animalType'],
-        'breed' => $_POST['breed'],
-        'name' =>$_POST['name'],
-        'email' =>$_POST['email'],
-        'phone' =>$_POST['phone'],
-        'location' => $_POST['location'],
+        'upload' => $upload, // Store file path or URL
+        'animalType' =>$type, //$_POST['animalType'],
+        'breed' =>$breed, //$_POST['breed'],
+        'name' =>$name, //$_POST['name'],
+        'email' =>$email, //$_POST['email'],
+        'phone' =>$phone, //$_POST['phone'],
+        'location' =>$location, //$_POST['location'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
