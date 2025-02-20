@@ -29,44 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    //validation
-    $name = $email = $number = "";
-
-    if(isset($_POST['name'])) $name = fix_string($_POST['name']);
-    if(isset($_POST['email'])) $email = fix_string($_POST['email']);
-    if(isset($_POST['phone'])) $number = fix_string($_POST['phone']);
-
-    $fail = validate_name($name);
-    $fail .= validate_email($email);
-    $fail .= validate_phone($number);
-
-    if ($fail !== "") {
-        echo json_encode(['status' => 'error', 'message' => $fail]);
-        exit;
-    }
-
-    function validate_name($field){
-        if (strlen($field) < 5) return "Name must be at least 5 characters<br>";
-        else if (preg_match("/^[a-zA-Z\s]+$/", $field)) return "Only letters and spaces allowed in Name <br>";
-        return "";
-    }
-    function validate_email($field){
-        if (!((strpos($field, ".") >0) && (strpos($field, "@") >0))|| preg_match("/[^a-zA-Z0-9.@_-]/", $field))
-        return  "Email address is invalid <br>";
-     return "";
-    }
-    function validate_phone($field){
-        if (strlen($field) <10) return "Number must be at least 10 digits <br>";
-        else if (preg_match("/^[0-9]{10,15}$/", $field)) return "Phone number must be 10-15 digits <br>";
-        return "";
-    }
-
-    function fix_string($string){
-        return htmlentities($string, ENT_QUOTES, 'UTF-8');
-    }
-    //validation
-
-
     $uploadPath = ''; // Initialize the upload path
 
     if (isset($_FILES['upload']) && $_FILES['upload']['error'] === UPLOAD_ERR_OK) {
@@ -83,12 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insert data into MongoDB
     $result = $collection->insertOne([
         'upload' => $uploadPath, // Store file path or URL
-        'animalType' => $_POST['animalType']??'',
-        'breed' => $_POST['breed']??'',
-        'name' =>$name, //$_POST['name'],
-        'email' =>$email, //$_POST['email'],
-        'phone' =>$number, //$_POST['phone'],
-        'location' => $_POST['location']??'',
+        'animalType' => $_POST['animalType'],
+        'breed' => $_POST['breed'],
+        'name' =>$_POST['name'],
+        'email' =>$_POST['email'],
+        'phone' =>$_POST['phone'],
+        'location' => $_POST['location'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
