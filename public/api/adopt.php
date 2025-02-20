@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Sanitize input
+    /* Sanitize input
     $shelter = htmlspecialchars($data['shelter'],ENT_QUOTES, 'UTF-8');
     $address = htmlspecialchars($data['address'],ENT_QUOTES, 'UTF-8');
     $type = htmlspecialchars($data['animalType'], ENT_QUOTES, 'UTF-8');
@@ -34,20 +34,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time = htmlspecialchars($data['visitTime'], ENT_QUOTES, 'UTF-8'); 
     $name = htmlspecialchars($data['applicantName'], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
-    $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8');
+    $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8');*/
 
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'shelter' =>$shelter, //$data['shelter'],
-        'address' =>$address, //$data['address'],
-        'animalType' =>$type, //$data['animalType'],
-        'breed' =>$breed, //$data['breed'],
-        'visitDate' =>$visit, //$data['visitDate'],
-        'visitTime' =>$time, //$data['visitTime'],
-        'applicantName' =>$name, //$data['applicantName'],
-        'email' =>$email, //$data['email'],
-        'phone' =>$phone, //$data['phone'],
+        'shelter' =>$data['shelter'],
+        'address' =>$data['address'],
+        'animalType' =>$data['animalType'],
+        'breed' =>$data['breed'],
+        'visitDate' =>$data['visitDate'],
+        'visitTime' =>$data['visitTime'],
+        'applicantName' =>$data['applicantName'],
+        'email' =>$data['email'],
+        'phone' =>$data['phone'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
