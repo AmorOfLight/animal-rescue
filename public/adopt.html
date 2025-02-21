@@ -679,7 +679,7 @@
         <!-- Adoption Form Section -->
         <section class="adoption-form">
             <h2>Adoption Application</h2>
-            <form id="adoptionForm">
+            <form id="adoptionForm" method="post">
                 <div class="form-group">
                     <label for="shelter">Selected Shelter:</label>
                     <input type="text" id="shelter" readonly>
@@ -924,7 +924,7 @@
 
         function updateAnimalList() {
             const animalType = document.getElementById('animalType').value;
-            const animalSelect = document.getElementById('animalSelect');
+            //const animalSelect = document.getElementById('animalSelect');
             
             // Clear current options
            // animalSelect.innerHTML = '<option value="">Select an animal</option>';
