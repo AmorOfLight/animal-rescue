@@ -26,25 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Sanitize input
+    /* Sanitize input
     $upload = htmlspecialchars($data['petPhotos'],ENT_QUOTES, 'UTF-8');
     $type = htmlspecialchars($data['animalType'],ENT_QUOTES, 'UTF-8');
     $breed = htmlspecialchars($data['breed'], ENT_QUOTES, 'UTF-8');
     $name = htmlspecialchars($data['name'], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
     $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8'); 
-    $location = htmlspecialchars($data['location'], ENT_QUOTES, 'UTF-8');
+    $location = htmlspecialchars($data['location'], ENT_QUOTES, 'UTF-8');*/
 
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
         'upload' => $upload, // Store file path or URL
-        'animalType' =>$type, //$_POST['animalType'],
-        'breed' =>$breed, //$_POST['breed'],
-        'name' =>$name, //$_POST['name'],
-        'email' =>$email, //$_POST['email'],
-        'phone' =>$phone, //$_POST['phone'],
-        'location' =>$location, //$_POST['location'],
+        'animalType' =>$_POST['animalType'],
+        'breed' =>$_POST['breed'],
+        'name' =>$_POST['name'],
+        'email' =>$_POST['email'],
+        'phone' =>$_POST['phone'],
+        'location' =>$_POST['location'],
         'timestamp' => new MongoDB\BSON\UTCDateTime()
     ]);
 
