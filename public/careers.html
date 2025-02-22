@@ -843,6 +843,257 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Careers Page Styles */
+        .careers-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/careers-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .careers-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .careers-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .careers-section {
+            padding: 4rem 0;
+        }
+
+        .careers-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .careers-section h2 {
+            text-align: center;
+            color: var(--dark-green);
+            margin-bottom: 2rem;
+        }
+
+        .job-category {
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .job-category h3 {
+            color: var(--dark-green);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .job-card h4 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .job-type {
+            display: inline-block;
+            background: var(--light-green);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-card p {
+            margin: 1rem 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .job-card ul {
+            margin: 1.5rem auto;
+            padding-left: 0;
+            list-style-position: inside;
+            text-align: left;
+            max-width: 500px;
+        }
+
+        .job-card li {
+            margin-bottom: 0.8rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .apply-btn {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .apply-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        .benefits-section {
+            background: #f9f9f9;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .benefits-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .benefits-section h2 {
+            color: var(--dark-green);
+            margin-bottom: 2rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .benefit-card i {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h4 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .benefit-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 968px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .careers-hero h1 {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .careers-hero p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+
+            .job-card {
+                padding: 1.5rem;
+            }
+
+            .job-card h4 {
+                font-size: 1.2rem;
+            }
+
+            .job-type {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .careers-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .careers-hero p {
+                font-size: 1rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-card {
+                padding: 1.25rem;
+            }
+
+            .job-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .job-card p {
+                font-size: 0.9rem;
+            }
+
+            .job-card ul {
+                font-size: 0.9rem;
+            }
+
+            .job-type {
+                font-size: 0.75rem;
+            }
+
+            .apply-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .benefit-card {
+                padding: 1.5rem;
+            }
+
+            .benefit-card h4 {
+                font-size: 1rem;
+            }
+
+            .benefit-card p {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -874,233 +1125,139 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to Animal Rescue SA</h1>
-                <p>Helping animals find their forever homes since 1999</p>
-                <div class="cta-buttons">
-                    <a href="adopt.html" class="btn primary-btn">Adopt Now</a>
-                    <a href="#donation" class="btn secondary-btn">Make a Donation</a>
-                </div>
+        <!-- Careers Hero Section -->
+        <section class="careers-hero">
+            <div class="container">
+                <h1>Join Our Team</h1>
+                <p>Make a difference in animals' lives while growing your career</p>
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
+        <!-- Available Positions -->
+        <section class="careers-section">
             <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-home"></i>
-                        <h4>12,500+</h4>
-                        <p>Animals Rehomed</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-heart"></i>
-                        <h4>20,000+</h4>
-                        <p>Lives Saved</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-user-friends"></i>
-                        <h4>5,000+</h4>
-                        <p>Active Volunteers</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-clinic-medical"></i>
-                        <h4>15,000+</h4>
-                        <p>Medical Treatments</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Surrender Animal Section -->
-        <section class="give-animal-section" id="give-animal">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Give an Animal</h2>
-                    <p>Help us find a new home for your pet</p>
-                </div>
+                <h2>Available Positions</h2>
                 
-                <form method="post" class="give-animal-form" id="give-animal-form" action="surrender.php" enctype="multipart/form-data">
-                    <div class="photo-upload">
-                        <h3>Upload Photos</h3>
-                        <div class="upload-container" id="upload">
-                            <input type="file" id="petPhotos" name="photos[]" multiple accept="image/*">
-                            <label for="petPhotos">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Drop photos here or click to upload</span>
-                                <small>Maximum 5 photos, 5MB each</small>
-                            </label>
-                            <div class="preview-photos" id="photoPreview"></div>
-                        </div>
+                <!-- IT Positions -->
+                <div class="job-category">
+                    <h3><i class="fas fa-laptop-code"></i> Information Technology</h3>
+                    
+                    <div class="job-card">
+                        <h4>Full Stack Developer</h4>
+                        <span class="job-type">Full-time</span>
+                        <p>We're seeking a talented Full Stack Developer to maintain and enhance our digital platforms, including our adoption management system and donation portal.</p>
+                        <ul>
+                            <li>3+ years experience in web development</li>
+                            <li>Proficient in PHP, JavaScript, HTML5, CSS3</li>
+                            <li>Experience with React and Node.js</li>
+                            <li>Database management skills (MySQL, MongoDB)</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: Full Stack Developer'">Apply Now</button>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="animalType">Animal Type*</label>
-                            <select id="animalType" name="animalType" required>
-                                <option value="">Select animal type</option>
-                                <option value="dog">Dog</option>
-                                <option value="cat">Cat</option>
-                                <option value="bird">Bird</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="breed">Breed (if known)</label>
-                            <input type="text" id="breed" name="breed" placeholder="e.g., Labrador, Persian">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Your Name*</label>
-                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address*</label>
-                            <input type="email" id="email" name="email" required placeholder="your@email.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number*</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="location">Location*</label>
-                            <input type="text" id="location" name="location" required placeholder="Your city/town">
-                        </div>
-
-                        <input type="submit" class="submit-btn" value="Submit Form" input>
+                    <div class="job-card">
+                        <h4>IT Support Specialist</h4>
+                        <span class="job-type">Part-time</span>
+                        <p>Looking for an IT Support Specialist to maintain our internal systems and provide technical assistance to our staff.</p>
+                        <ul>
+                            <li>2+ years IT support experience</li>
+                            <li>Knowledge of Windows and Mac OS</li>
+                            <li>Network troubleshooting skills</li>
+                            <li>Strong communication abilities</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: IT Support Specialist'">Apply Now</button>
                     </div>
-                </form>
+                </div>
 
-                <!-- Response Message -->
-                <div id="responseMessage" style="margin-top: 20px; color: green;"></div>
+                <!-- Design Positions -->
+                <div class="job-category">
+                    <h3><i class="fas fa-paint-brush"></i> Design</h3>
+                    
+                    <div class="job-card">
+                        <h4>Graphic Designer</h4>
+                        <span class="job-type">Full-time</span>
+                        <p>We need a creative Graphic Designer to develop engaging visual content for our campaigns and social media presence.</p>
+                        <ul>
+                            <li>3+ years graphic design experience</li>
+                            <li>Proficient in Adobe Creative Suite</li>
+                            <li>Strong portfolio demonstrating various styles</li>
+                            <li>Experience in social media design</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: Graphic Designer'">Apply Now</button>
+                    </div>
+
+                    <div class="job-card">
+                        <h4>UI/UX Designer</h4>
+                        <span class="job-type">Full-time</span>
+                        <p>Seeking a UI/UX Designer to improve our digital platforms and create intuitive user experiences.</p>
+                        <ul>
+                            <li>2+ years UI/UX design experience</li>
+                            <li>Proficient in Figma and Adobe XD</li>
+                            <li>Understanding of user-centered design principles</li>
+                            <li>Experience with responsive design</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: UI/UX Designer'">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Marketing Positions -->
+                <div class="job-category">
+                    <h3><i class="fas fa-bullhorn"></i> Marketing</h3>
+                    
+                    <div class="job-card">
+                        <h4>Digital Marketing Manager</h4>
+                        <span class="job-type">Full-time</span>
+                        <p>Looking for a Digital Marketing Manager to lead our online presence and campaign strategies.</p>
+                        <ul>
+                            <li>5+ years digital marketing experience</li>
+                            <li>Proven track record in social media management</li>
+                            <li>Experience with Google Analytics and SEO</li>
+                            <li>Strong analytical and strategic thinking skills</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: Digital Marketing Manager'">Apply Now</button>
+                    </div>
+
+                    <div class="job-card">
+                        <h4>Content Creator</h4>
+                        <span class="job-type">Part-time</span>
+                        <p>Seeking a creative Content Creator to produce engaging content for our social media channels and website.</p>
+                        <ul>
+                            <li>2+ years content creation experience</li>
+                            <li>Strong writing and editing skills</li>
+                            <li>Photography and video editing abilities</li>
+                            <li>Experience with social media platforms</li>
+                        </ul>
+                        <button class="apply-btn" onclick="location.href='mailto:careers@animalrescue.co.za?subject=Application: Content Creator'">Apply Now</button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Impact Section -->
-        <section class="impact-section">
+        <!-- Benefits Section -->
+        <section class="benefits-section">
             <div class="container">
-                <h2>Your Impact</h2>
-                <div class="impact-grid">
-                    <div class="impact-item">
-                        <i class="fas fa-utensils impact-icon"></i>
-                        <h3>Food & Nutrition</h3>
-                        <p>Provides quality meals and supplements</p>
+                <h2>Why Work With Us?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-heart"></i>
+                        <h4>Make a Difference</h4>
+                        <p>Help save and improve the lives of animals in need</p>
                     </div>
-                    <div class="impact-item">
-                        <i class="fas fa-heartbeat impact-icon"></i>
-                        <h3>Medical Care</h3>
-                        <p>Supports veterinary treatments and vaccinations</p>
+                    <div class="benefit-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Growth Opportunities</h4>
+                        <p>Continuous learning and career development</p>
                     </div>
-                    <div class="impact-item">
-                        <i class="fas fa-home impact-icon"></i>
-                        <h3>Shelter Operations</h3>
-                        <p>Helps maintain safe and clean facilities</p>
+                    <div class="benefit-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Great Culture</h4>
+                        <p>Join a passionate and supportive team</p>
                     </div>
-                    <div class="impact-item">
-                        <i class="fas fa-ambulance impact-icon"></i>
-                        <h3>Rescue Operations</h3>
-                        <p>Enables emergency rescue missions</p>
+                    <div class="benefit-card">
+                        <i class="fas fa-medal"></i>
+                        <h4>Competitive Benefits</h4>
+                        <p>Health insurance, flexible hours, and more</p>
                     </div>
-                    <div class="impact-item">
-                        <i class="fas fa-clinic-medical impact-icon"></i>
-                        <h3>Sterilization</h3>
-                        <p>Supports spay/neuter programs</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Donation Section -->
-        <section class="donation-section">
-            <div class="container" id="donation">
-                <div class="section-header">
-                    <h2>Make a Donation</h2>
-                    <p>Your support helps us save more animals in need</p>
-                </div>
-                <div class="donation-container">
-                    <form method="post" id="donation-form">
-                        <!-- Personal Information -->
-                        <div class="form-grid">
-                           <div class="form-group">
-                               <!-- <label for="donor-name">Full Name*</label>-->
-                                <input type="text" id="donor-name" name="donor-name" required placeholder="Enter your full name">
-                            </div>
-
-                            <div class="form-group">
-                                <!--<label for="donor-email">Email Address*</label>-->
-                                <input type="email" id="donor-email" name="donor-email" required placeholder="your@email.com">
-                            </div>
-                        </div>
-
-                        <!-- Donation Amount -->
-                        <h3>Select Amount (ZAR)</h3>
-                        <div class="amount-buttons">
-                            <button type="button" class="amount-btn">R100</button>
-                            <button type="button" class="amount-btn">R200</button>
-                            <button type="button" class="amount-btn">R500</button>
-                            <button type="button" class="amount-btn">R1000</button>
-                            <div class="form-group">
-                                <input type="number" id="amount" placeholder="Custom Amount" class="custom-amount">
-                            </div>
-                            
-                        </div>
-
-                        <!-- Rest of the existing donation form content -->
-                        <div class="payment-methods">
-                            <h3>Payment Method</h3>
-                            <div class="payment-options">
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="card">
-                                    <i class="fas fa-credit-card payment-icon"></i>
-                                    <span>Credit/Debit Card</span>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="eft">
-                                    <i class="fas fa-university payment-icon"></i>
-                                    <span>EFT</span>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="snapscan">
-                                    <i class="fas fa-qrcode payment-icon"></i>
-                                    <span>SnapScan</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="terms-section">
-                            <label class="checkbox-container">
-                                <input type="checkbox" required>
-                                <span>I agree to the Terms and Conditions and Privacy Policy</span>
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span>I would like to receive updates about the impact of my donation</span>
-                            </label>
-                        </div>
-
-                        <div class="security-info">
-                            <p class="security-item">
-                                <i class="fas fa-lock security-icon"></i>
-                                <span>Your payment is secured by SSL encryption</span>
-                            </p>
-                            <p class="security-item">
-                                <i class="fas fa-shield-alt security-icon"></i>
-                                <span>We use trusted payment gateways: PayFast, Stripe, and PayGate</span>
-                            </p>
-                            <p class="security-item">
-                                <i class="fas fa-envelope security-icon"></i>
-                                <span>You will receive a confirmation email with your donation receipt</span>
-                            </p>
-                        </div>
-
-                        <button class="donate-btn">Complete Donation</button>
-                    </form>
                 </div>
             </div>
         </section>

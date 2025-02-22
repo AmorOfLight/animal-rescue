@@ -438,7 +438,7 @@
         }
 
         .view-btn {
-            background: var(--dark-green);
+            background: var(--primary-green);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
@@ -447,10 +447,13 @@
             width: 100%;
             font-size: 0.66rem;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
         }
 
         .view-btn:hover {
-            background: var(--primary-green);
+            background: var(--dark-green);
         }
 
         #visitDate {
@@ -570,7 +573,7 @@
     <header class="main-header">
         <div class="container">
             <div class="logo">
-                <img src="images/logo.png" alt="Animal Rescue SA Logo">
+                <img src="ani logo.png" alt="Animal Rescue SA Logo">
             </div>
           
             <nav class="nav-menu">
@@ -619,7 +622,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> 1st Ave, Grassy Park, Cape Town</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 45</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('SPCA_Cape_Town_Animals.pdf')">View Available Animals</button>
+                        <a href="https://capespca.co.za/adopt/" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('SPCA Cape Town', '1st Ave, Grassy Park, Cape Town')">Select for Adoption</button>
                     </div>
                 </div>
@@ -629,7 +632,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> Devon Valley Road, Stellenbosch</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 28</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('AWS_Stellenbosch_Animals.pdf')">View Available Animals</button>
+                        <a href="https://awss.co.za/adopt/" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('Animal Welfare Society Stellenbosch', 'Devon Valley Road, Stellenbosch')">Select for Adoption</button>
                     </div>
                 </div>
@@ -639,7 +642,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> Melkbosstrand Road, Cape Town</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 25</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('Fallen_Angels_Animals.pdf')">View Available Animals</button>
+                        <a href="https://www.fallenangels.org.za/" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('Fallen Angels Pet Rescue', 'Melkbosstrand Road, Cape Town')">Select for Adoption</button>
                     </div>
                 </div>
@@ -649,7 +652,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> Joostenbergvlakte, Cape Town</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 30</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('Lucky_Lucy_Animals.pdf')">View Available Animals</button>
+                        <a href="https://www.luckylucy.org/adopt-a-pet/" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('Lucky Lucy Foundation', 'Joostenbergvlakte, Cape Town')">Select for Adoption</button>
                     </div>
                 </div>
@@ -659,7 +662,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> Main Road, Hout Bay, Cape Town</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 35</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('DARG_Animals.pdf')">View Available Animals</button>
+                        <a href="https://www.darg.org.za/adopt" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('Domestic Animal Rescue Group', 'Main Road, Hout Bay, Cape Town')">Select for Adoption</button>
                     </div>
                 </div>
@@ -669,7 +672,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> 1 First Avenue, Grassy Park, Cape Town</p>
                     <p><i class="fas fa-dog"></i> Available Animals: 42</p>
                     <div class="shelter-buttons">
-                        <button class="view-btn" onclick="viewAnimals('Cape_SPCA_Animals.pdf')">View Available Animals</button>
+                        <a href="https://capespca.co.za/adopt/" target="_blank" rel="noopener" class="view-btn">View Available Animals</a>
                         <button class="submit-btn" onclick="selectShelter('Cape of Good Hope SPCA', '1 First Avenue, Grassy Park, Cape Town')">Select for Adoption</button>
                     </div>
                 </div>
@@ -714,9 +717,9 @@
                         <option value="10:00">10:00 AM</option>
                         <option value="11:00">11:00 AM</option>
                         <option value="12:00">12:00 PM</option>
-                        <option value="14:00">02:00 PM</option>
-                        <option value="15:00">03:00 PM</option>
-                        <option value="16:00">04:00 PM</option>
+                        <option value="14:00">14:00 PM</option>
+                        <option value="15:00">15:00 PM</option>
+                        <option value="16:00">16:00 PM</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -743,7 +746,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-info">
-                <img src="images/logo-white.png" alt="Animal Rescue SA" class="footer-logo">
+                <img src="ani logo.png" alt="Animal Rescue SA" class="footer-logo">
                 <p>Making a difference in animals' lives since 1999</p>
             </div>
             
@@ -767,12 +770,13 @@
             <div class="footer-social">
                 <h4>Follow Us</h4>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/18BdPkMA27/?mibextid=wwXIfr" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+
+                    <a href="https://www.instagram.com/animal_rescue_sa/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
+        
         
         <div class="footer-bottom">
             <p>&copy; 2024 Animal Rescue SA. All rights reserved.</p>

@@ -843,11 +843,153 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Contact Section Styles */
+        .contact-section {
+            padding: 4rem 0;
+            background: #f9f9f9;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-green);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .map-section {
+            margin-top: 3rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .submit-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 968px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .info-card {
+                padding: 1rem;
+            }
+
+            #map {
+                height: 300px;
+            }
+        }
     </style>
 </head>
 <body>
-  
-
     <!-- Main Header -->
     <header class="main-header">
         <div class="container">
@@ -863,7 +1005,6 @@
                 </ul>
             </nav>
 
-           
             <div class="hamburger-menu">
                 <span></span>
                 <span></span>
@@ -874,233 +1015,84 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome to Animal Rescue SA</h1>
-                <p>Helping animals find their forever homes since 1999</p>
-                <div class="cta-buttons">
-                    <a href="adopt.html" class="btn primary-btn">Adopt Now</a>
-                    <a href="#donation" class="btn secondary-btn">Make a Donation</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-home"></i>
-                        <h4>12,500+</h4>
-                        <p>Animals Rehomed</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-heart"></i>
-                        <h4>20,000+</h4>
-                        <p>Lives Saved</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-user-friends"></i>
-                        <h4>5,000+</h4>
-                        <p>Active Volunteers</p>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-clinic-medical"></i>
-                        <h4>15,000+</h4>
-                        <p>Medical Treatments</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Surrender Animal Section -->
-        <section class="give-animal-section" id="give-animal">
+        <section class="contact-section">
             <div class="container">
                 <div class="section-header">
-                    <h2>Give an Animal</h2>
-                    <p>Help us find a new home for your pet</p>
+                    <h2>Contact Us</h2>
+                    <p>We're here to help! Reach out to us with any questions or concerns.</p>
                 </div>
-                
-                <form method="post" class="give-animal-form" id="give-animal-form" action="surrender.php" enctype="multipart/form-data">
-                    <div class="photo-upload">
-                        <h3>Upload Photos</h3>
-                        <div class="upload-container" id="upload">
-                            <input type="file" id="petPhotos" name="photos[]" multiple accept="image/*">
-                            <label for="petPhotos">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Drop photos here or click to upload</span>
-                                <small>Maximum 5 photos, 5MB each</small>
-                            </label>
-                            <div class="preview-photos" id="photoPreview"></div>
+
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <div class="info-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Visit Us</h3>
+                            <p>123 Animal Care Street<br>Cape Town, 8001<br>South Africa</p>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-phone"></i>
+                            <h3>Call Us</h3>
+                            <p>Tel: +27 21 700 4158<br>Emergency: +27 21 700 4159</p>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email Us</h3>
+                            <p>info@animalrescue.co.za<br>support@animalrescue.co.za</p>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-clock"></i>
+                            <h3>Opening Hours</h3>
+                            <p>Monday - Friday: 8:00 - 17:00<br>Saturday: 9:00 - 13:00<br>Sunday: Closed</p>
                         </div>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="animalType">Animal Type*</label>
-                            <select id="animalType" name="animalType" required>
-                                <option value="">Select animal type</option>
-                                <option value="dog">Dog</option>
-                                <option value="cat">Cat</option>
-                                <option value="bird">Bird</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="breed">Breed (if known)</label>
-                            <input type="text" id="breed" name="breed" placeholder="e.g., Labrador, Persian">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Your Name*</label>
-                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email Address*</label>
-                            <input type="email" id="email" name="email" required placeholder="your@email.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number*</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="location">Location*</label>
-                            <input type="text" id="location" name="location" required placeholder="Your city/town">
-                        </div>
-
-                        <input type="submit" class="submit-btn" value="Submit Form" input>
-                    </div>
-                </form>
-
-                <!-- Response Message -->
-                <div id="responseMessage" style="margin-top: 20px; color: green;"></div>
-            </div>
-        </section>
-
-        <!-- Impact Section -->
-        <section class="impact-section">
-            <div class="container">
-                <h2>Your Impact</h2>
-                <div class="impact-grid">
-                    <div class="impact-item">
-                        <i class="fas fa-utensils impact-icon"></i>
-                        <h3>Food & Nutrition</h3>
-                        <p>Provides quality meals and supplements</p>
-                    </div>
-                    <div class="impact-item">
-                        <i class="fas fa-heartbeat impact-icon"></i>
-                        <h3>Medical Care</h3>
-                        <p>Supports veterinary treatments and vaccinations</p>
-                    </div>
-                    <div class="impact-item">
-                        <i class="fas fa-home impact-icon"></i>
-                        <h3>Shelter Operations</h3>
-                        <p>Helps maintain safe and clean facilities</p>
-                    </div>
-                    <div class="impact-item">
-                        <i class="fas fa-ambulance impact-icon"></i>
-                        <h3>Rescue Operations</h3>
-                        <p>Enables emergency rescue missions</p>
-                    </div>
-                    <div class="impact-item">
-                        <i class="fas fa-clinic-medical impact-icon"></i>
-                        <h3>Sterilization</h3>
-                        <p>Supports spay/neuter programs</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Donation Section -->
-        <section class="donation-section">
-            <div class="container" id="donation">
-                <div class="section-header">
-                    <h2>Make a Donation</h2>
-                    <p>Your support helps us save more animals in need</p>
-                </div>
-                <div class="donation-container">
-                    <form method="post" id="donation-form">
-                        <!-- Personal Information -->
-                        <div class="form-grid">
-                           <div class="form-group">
-                               <!-- <label for="donor-name">Full Name*</label>-->
-                                <input type="text" id="donor-name" name="donor-name" required placeholder="Enter your full name">
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <form id="contact-form" method="post">
+                            <div class="form-group">
+                                <label for="name">Full Name*</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your full name">
                             </div>
 
                             <div class="form-group">
-                                <!--<label for="donor-email">Email Address*</label>-->
-                                <input type="email" id="donor-email" name="donor-email" required placeholder="your@email.com">
+                                <label for="email">Email Address*</label>
+                                <input type="email" id="email" name="email" required placeholder="your@email.com">
                             </div>
-                        </div>
 
-                        <!-- Donation Amount -->
-                        <h3>Select Amount (ZAR)</h3>
-                        <div class="amount-buttons">
-                            <button type="button" class="amount-btn">R100</button>
-                            <button type="button" class="amount-btn">R200</button>
-                            <button type="button" class="amount-btn">R500</button>
-                            <button type="button" class="amount-btn">R1000</button>
                             <div class="form-group">
-                                <input type="number" id="amount" placeholder="Custom Amount" class="custom-amount">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
                             </div>
-                            
-                        </div>
 
-                        <!-- Rest of the existing donation form content -->
-                        <div class="payment-methods">
-                            <h3>Payment Method</h3>
-                            <div class="payment-options">
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="card">
-                                    <i class="fas fa-credit-card payment-icon"></i>
-                                    <span>Credit/Debit Card</span>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="eft">
-                                    <i class="fas fa-university payment-icon"></i>
-                                    <span>EFT</span>
-                                </label>
-                                <label class="payment-option">
-                                    <input type="radio" name="payment" value="snapscan">
-                                    <i class="fas fa-qrcode payment-icon"></i>
-                                    <span>SnapScan</span>
-                                </label>
+                            <div class="form-group">
+                                <label for="subject">Subject*</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="adoption">Adoption Inquiry</option>
+                                    <option value="donation">Donation Query</option>
+                                    <option value="volunteer">Volunteering</option>
+                                    <option value="emergency">Report Emergency</option>
+                                    <option value="other">Other</option>
+                                </select>
                             </div>
-                        </div>
 
-                        <div class="terms-section">
-                            <label class="checkbox-container">
-                                <input type="checkbox" required>
-                                <span>I agree to the Terms and Conditions and Privacy Policy</span>
-                            </label>
-                            <label class="checkbox-container">
-                                <input type="checkbox">
-                                <span>I would like to receive updates about the impact of my donation</span>
-                            </label>
-                        </div>
+                            <div class="form-group">
+                                <label for="message">Message*</label>
+                                <textarea id="message" name="message" required placeholder="Type your message here..."></textarea>
+                            </div>
 
-                        <div class="security-info">
-                            <p class="security-item">
-                                <i class="fas fa-lock security-icon"></i>
-                                <span>Your payment is secured by SSL encryption</span>
-                            </p>
-                            <p class="security-item">
-                                <i class="fas fa-shield-alt security-icon"></i>
-                                <span>We use trusted payment gateways: PayFast, Stripe, and PayGate</span>
-                            </p>
-                            <p class="security-item">
-                                <i class="fas fa-envelope security-icon"></i>
-                                <span>You will receive a confirmation email with your donation receipt</span>
-                            </p>
-                        </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
 
-                        <button class="donate-btn">Complete Donation</button>
-                    </form>
+                <!-- Map Section -->
+                <div class="map-section">
+                    <div id="map"></div>
                 </div>
             </div>
         </section>
@@ -1152,7 +1144,6 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="js/app.js"></script>
     <script>
         // Mobile menu toggle
         const hamburger = document.querySelector('.hamburger-menu');
@@ -1171,140 +1162,40 @@
             }
         });
 
-        // Animation for stats when they come into view
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        // Initialize map
+        const map = L.map('map').setView([-33.9249, 18.4241], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
+        // Add marker
+        L.marker([-33.9249, 18.4241]).addTo(map)
+            .bindPopup('Animal Rescue SA<br>123 Animal Care Street')
+            .openPopup();
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = document.getElementById('contact-form');
+            const formData = new FormData(this);
+            
+            fetch('https://plankton-app-2evxj.ondigitalocean.app/api/contact.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert(result.message);
+                if (result.success) {
+                    this.reset();
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while sending your message.');
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.stat-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(card);
         });
     </script>
-
-<!--To surrender-->
-    <script>
-       document.getElementById('give-animal-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const fileInput = document.getElementById('petPhotos');
-    const files = fileInput.files;
-
-    // Clear any existing files from FormData
-    formData.delete('photos[]');
-    
-    // Add each file to FormData
-    for (let i = 0; i < files.length; i++) {
-        formData.append('photos[]', files[i]);
-    }
-
-    fetch('https://plankton-app-2evxj.ondigitalocean.app/api/surrender.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(result => {
-        alert(result.message);
-        if (result.success) {
-            document.getElementById('give-animal-form').reset();
-            document.getElementById('photoPreview').innerHTML = '';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the form.');
-    });
-});
-
-// Add preview functionality
-document.getElementById('petPhotos').addEventListener('change', function(e) {
-    const preview = document.getElementById('photoPreview');
-    preview.innerHTML = ''; // Clear existing previews
-    
-    const files = e.target.files;
-    
-    if (files.length > 5) {
-        alert('Maximum 5 photos allowed');
-        this.value = ''; // Clear the file input
-        return;
-    }
-
-    for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        
-        // Check file size (5MB = 5 * 1024 * 1024 bytes)
-        if (file.size > 5 * 1024 * 1024) {
-            alert(`File ${file.name} is too large. Maximum size is 5MB`);
-            continue;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const div = document.createElement('div');
-            div.style.cssText = 'position: relative; display: inline-block; margin: 5px;';
-            
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.cssText = 'width: 100px; height: 100px; object-fit: cover; border-radius: 4px;';
-            
-            const removeBtn = document.createElement('button');
-            removeBtn.innerHTML = '×';
-            removeBtn.style.cssText = 'position: absolute; top: -8px; right: -8px; background: red; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer;';
-            removeBtn.onclick = function(e) {
-                e.preventDefault();
-                div.remove();
-            };
-            
-            div.appendChild(img);
-            div.appendChild(removeBtn);
-            preview.appendChild(div);
-        };
-        reader.readAsDataURL(file);
-    }
-});
-    </script>
-
-<!--To Donate-->
-<script>
-    document.getElementById('donation-form').addEventListener('submit', function (e) {
- e.preventDefault();
-
- const data = {
-   name: document.getElementById('donor-name').value,
-   email: document.getElementById('donor-email').value,
-   amount: document.getElementById('amount').value,
- };
-
- fetch('https://plankton-app-2evxj.ondigitalocean.app/api/donate.php', {
-   method: 'POST',
-   headers: {
-     'Content-Type': 'application/json',
-   },
-   body: JSON.stringify(data),
- })
-   .then(response => response.json())
-   .then(result => {
-     alert(result.message);
-   })
-   .catch(error => {
-     console.error('Error:', error);
-   });
-});
- </script>
 </body>
 </html>
