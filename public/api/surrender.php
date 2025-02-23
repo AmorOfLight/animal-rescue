@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
 
     // Validate input
-    if (isset($_FILES['photos'])) {
+    if (isset($_FILES['photos[]'])) {
         $image = $_FILES['photos[]'];
 
         // Validate that name and image are not empty

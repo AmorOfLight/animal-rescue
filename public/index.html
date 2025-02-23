@@ -1201,13 +1201,15 @@
        document.getElementById('give-animal-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const formData = new FormData();//(this);
-    formData.append('photos[]', document.getElementById('photos[]').files[0]);
-    const fileInput = document.getElementById('petPhotos');
+    const formData = new FormData(this);
+    const fileInput = document.getElementById('petPhotos'); // Get the file input element
     const files = fileInput.files;
+    
+    
+    
 
     // Clear any existing files from FormData
-    formData.delete('photos[]');
+   // formData.delete('photos[]');
     
     // Add each file to FormData
     for (let i = 0; i < files.length; i++) {
