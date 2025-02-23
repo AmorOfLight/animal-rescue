@@ -26,32 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!empty($_FILES['photos'])) {
-        $photos = [];
-        foreach ($_FILES['photos']['tmp_name'] as $key => $tmpName) {
-            $filename = uniqid() . '_' . $_FILES['photos']['name'][$key];
-            $filePath = $tempDir . $filename;
+    // Validate input
+    if (isset($_FILES['photos'])) {
+        $image = $_FILES['photos[]'];
 
-            // Move uploaded file
-            if (move_uploaded_file($tmpName, $filePath)) {
-                // Store in GridFS
-                $gridFS = $database->selectGridFSBucket();
-                $fileStream = fopen($filePath, 'rb');
-                $uploadResult = $gridFS->uploadFromStream($filename, $fileStream);
-                fclose($fileStream);
-
-                // Get File ID from GridFS
-                $fileId = (string) $uploadResult;
-                $photos[] = $fileId;
-
-                // Remove the temp file
-                unlink($filePath);
-            }
-        }
+        // Validate that name and image are not empty
+        if (!empty($image['tmp_name'])) {
+            // Read the image file
+            $imageData = file_get_contents($image['tmp_name']);
+        
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'photos' => $photos,
+        'photos' => new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC),
         'animalType' =>$_POST['animalType'],
         'breed' =>$_POST['breed'],
         'name' =>$_POST['name'],
@@ -63,10 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->getInsertedCount() === 1) {
         echo json_encode(['status' => 'success', 'message' => 'Pet surrender submitted']);
-    } else {
+    }} else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to submit surrender']);
     }
-}else {
+}}else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
 }catch (Exception $e) {

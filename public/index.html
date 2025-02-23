@@ -1202,6 +1202,7 @@
     e.preventDefault();
 
     const formData = new FormData(this);
+    formData.append('photos[]', document.getElementById('photos[]').files[0]);
     const fileInput = document.getElementById('petPhotos');
     const files = fileInput.files;
 
