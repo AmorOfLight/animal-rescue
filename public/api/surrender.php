@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Read the image file and convert it to Base64
             $pictureData = base64_encode(file_get_contents($picture['tmp_name']));
         }
-    }
+    
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'photos[]' => $pictureData,
+        'photos' => $pictureData,
         'animalType' =>$_POST['animalType'],
         'breed' =>$_POST['breed'],
         'name' =>$_POST['name'],
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
-}catch (Exception $e) {
+}}catch (Exception $e) {
     echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
 }
 
