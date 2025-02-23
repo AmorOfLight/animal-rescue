@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
 
     if ($result->getInsertedCount() === 1) {
-        echo json_encode(['status' => 'success', 'message' => 'Adoption application submitted']);
+        echo json_encode(['status' => 'success', 'message' => 'Contact details submitted']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to submit application']);
     }

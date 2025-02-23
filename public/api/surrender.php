@@ -26,9 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
+    if(isset($_FILES['photos[]'])){
+        $picture = $_FILES['photos[]'];
+
+        if(!empty($picture['tmp_name'])){
+            // Read the image file and convert it to Base64
+            $pictureData = base64_encode(file_get_contents($picture['tmp_name']));
+        }
+    }
+
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'upload' => $upload, // Store file path or URL
+        'photos[]' => $pictureData,
         'animalType' =>$_POST['animalType'],
         'breed' =>$_POST['breed'],
         'name' =>$_POST['name'],
