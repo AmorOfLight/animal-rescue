@@ -26,18 +26,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if(isset($_FILES['photos[]'])){
-        $picture = $_FILES['photos[]'];
+    if (!empty($_FILES['photos'])) {
+        $photos = [];
+        foreach ($_FILES['photos']['tmp_name'] as $key => $tmpName) {
+            $filename = uniqid() . '_' . $_FILES['photos']['name'][$key];
+            $filePath = $tempDir . $filename;
 
-        if(!empty($picture['tmp_name'])){
-            // Read the image file and convert it to Base64
-            $pictureData = base64_encode(file_get_contents($picture['tmp_name']));
+            // Move uploaded file
+            if (move_uploaded_file($tmpName, $filePath)) {
+                // Store in GridFS
+                $gridFS = $database->selectGridFSBucket();
+                $fileStream = fopen($filePath, 'rb');
+                $uploadResult = $gridFS->uploadFromStream($filename, $fileStream);
+                fclose($fileStream);
+
+                // Get File ID from GridFS
+                $fileId = (string) $uploadResult;
+                $photos[] = $fileId;
+
+                // Remove the temp file
+                unlink($filePath);
+            }
         }
-    
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'photos' => $pictureData,
+        'photos' => $photos,
         'animalType' =>$_POST['animalType'],
         'breed' =>$_POST['breed'],
         'name' =>$_POST['name'],
@@ -55,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
-}}catch (Exception $e) {
+}catch (Exception $e) {
     echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
 }
 
