@@ -25,13 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
-
-    if($_FILES){
-        $name = $_FILES['photos[]']['name'];
-        move_uploaded_file($_FILES['photos[]']['tmp_name'], $name);
-        echo "uploaded image '$name'<br><img src='$name'>";
     
-        
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
@@ -47,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->getInsertedCount() === 1) {
         echo json_encode(['status' => 'success', 'message' => 'Pet surrender submitted']);
-    }} else {
+    }else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to submit surrender']);
     }
 }else {

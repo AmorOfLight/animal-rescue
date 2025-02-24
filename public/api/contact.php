@@ -4,6 +4,10 @@ header("Access-Control-Allow-Origin: https://plankton-app-2evxj.ondigitalocean.a
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 // Include Composer autoload
 require __DIR__ . '/../../vendor/autoload.php';
 
@@ -14,14 +18,68 @@ $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b502
 $databaseName = "animalrescue"; // database name
 
 
-try{
+
+//Connect to MongoDB
+$client = new Client($mongoUri);
+$collection = $client->animalrescue->contact;
+
+function sanitizeString($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+    return $input;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $email = $phone = $subject = $message = "";
+
+    // Sanitize inputs
+    $name = isset($_POST['name']) ? sanitizeString($_POST['name']) : '';
+    $email = isset($_POST['email']) ? sanitizeString($_POST['email']) : '';
+    $phone = isset($_POST['phone']) ? sanitizeString($_POST['phone']) : '';
+    $subject = isset($_POST['subject']) ? sanitizeString($_POST['subject']) : '';
+    $message = isset($_POST['message']) ? sanitizeString($_POST['message']) : '';
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(["message" => "Invalid email address!"]);
+        exit;
+    }
+
+    try {
+        // Insert into MongoDB
+        $result = $collection->insertOne([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'subject' => $subject,
+            'message' => $message,
+            'timestamp' => new MongoDB\BSON\UTCDateTime()
+        ]);
+
+        if ($result->getInsertedCount() > 0) {
+            echo json_encode(["message" => "Data inserted successfully!"]);
+        } else {
+            http_response_code(500);
+            echo json_encode(["message" => "Failed to insert data."]);
+        }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["message" => "Server error: " . $e->getMessage()]);
+    }
+}
+
+
+/*try{
     //Connect to MongoDB
     $client = new Client($mongoUri);
     $collection = $client->animalrescue->contact;
 
     
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+   /* if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        
      // Initialize variables
      $name = $email = $phone = $subject = $message = "";
     
@@ -101,7 +159,7 @@ try{
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }*/
-}catch (Exception $e) {
+/*}catch (Exception $e) {
    // echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
-}
+}*/
 ?>
