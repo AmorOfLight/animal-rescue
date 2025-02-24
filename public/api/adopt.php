@@ -6,9 +6,11 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 // Include Composer autoload
 require __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../db.php';
 
 use MongoDB\Client;
+require_once __DIR__ . '/../db.php';
+
+
 //Connect to MongoDB
 $client = new Client($mongoUri);
 $collection = $client->animalrescue->adoptions;
