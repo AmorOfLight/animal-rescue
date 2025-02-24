@@ -20,6 +20,7 @@ try{
     $collection = $client->animalrescue->adoptions;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+       
         // Initialize variables
         $shelter = $address = $animal = $breed = $visit_date = $visit_time = $name = $email = $phone = "";
     

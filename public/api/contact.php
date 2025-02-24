@@ -19,6 +19,7 @@ try{
     $client = new Client($mongoUri);
     $collection = $client->animalrescue->contact;
 
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
      // Initialize variables
@@ -30,9 +31,8 @@ try{
      }
      if (isset($_POST['email'])) {
          $email = sanitizeString($_POST['email']);
-         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            die("Invalid email address!");
-        }
+         echo json_encode(["message" => "Invalid email address!"]);
+         exit;
      }
      if (isset($_POST['phone'])) {
          $phone = sanitizeString($_POST['phone']);
@@ -56,9 +56,9 @@ try{
      ]);
  
      if ($result->getInsertedCount() > 0) {
-         echo "Data inserted successfully!";
+        echo json_encode(["message" => "Data inserted successfully!"]);
      } else {
-         echo "Failed to insert data.";
+        echo json_encode(["message" => "Failed to insert data."]);
      }
  }
  
