@@ -13,50 +13,43 @@ use MongoDB\Client;
 $mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
 $databaseName = "animalrescue"; // database name
 
+//Connect to MongoDB
+$client = new Client($mongoUri);
+$collection = $client->animalrescue->adoptions;
 
-try{
-    //Connect to MongoDB
-    $client = new Client($mongoUri);
-    $collection = $client->animalrescue->adoptions;
+// Sanitize string input
+function sanitizeString($input) {
+    $input = trim($input);
+    $input = strip_tags($input);
+    $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
+    return $input;
+}
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       
-        // Initialize variables
-        $shelter = $address = $animal = $breed = $visit_date = $visit_time = $name = $email = $phone = "";
-    
-        // Sanitize and validate input
-        if (isset($_POST['shelter'])) {
-            $shelter = sanitizeString($_POST['shelter']);
-        }
-        if (isset($_POST['address'])) {
-            $address = sanitizeString($_POST['address']);
-        }
-        if (isset($_POST['animalType'])) {
-            $animal = sanitizeString($_POST['animalType']);
-        }
-        if (isset($_POST['breed'])) {
-            $breed = sanitizeString($_POST['breed']);
-        }
-        if (isset($_POST['visitDate'])) {
-            $visit_date = sanitizeString($_POST['visitDate']);
-        }
-        if (isset($_POST['visitTime'])) {
-            $visit_time = sanitizeString($_POST['visitTime']);
-        }
-        if (isset($_POST['applicantName'])) {
-            $name = sanitizeString($_POST['applicantName']);
-        }
-        if (isset($_POST['email'])) {
-            $email = sanitizeInput($_POST['email']);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                die("Invalid email address!");
-            }
-        }
-        if (isset($_POST['phone'])) {
-            $phone = sanitizeInput($_POST['phone']);
-            // Add phone number validation if needed
-        }
-    
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    // Initialize variables
+    $shelter = $address = $animal = $breed = $visit_date = $visit_time = $name = $email = $phone = "";
+
+    // Sanitize inputs
+    $shelter = isset($_POST['shelter']) ? sanitizeString($_POST['shelter']) : '';
+    $address = isset($_POST['address']) ? sanitizeString($_POST['address']) : '';
+    $animal = isset($_POST['animalType']) ? sanitizeString($_POST['animalType']) : '';
+    $breed = isset($_POST['breed']) ? sanitizeString($_POST['breed']) : '';
+    $visit_date = isset($_POST['visitDate']) ? sanitizeString($_POST['visitDate']) : '';
+    $visit_time = isset($_POST['visitTime']) ? sanitizeString($_POST['visitTime']) : '';
+    $name = isset($_POST['applicantName']) ? sanitizeString($_POST['applicantName']) : '';
+    $email = isset($_POST['email']) ? sanitizeString($_POST['email']) : '';
+    $phone = isset($_POST['phone']) ? sanitizeString($_POST['phone']) : '';
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(["message" => "Invalid email address!"]);
+        exit;
+    }
+
+    try{
+
         // Insert sanitized data into MongoDB
         $result = $collection->insertOne([
             'shelter' => $shelter,
@@ -72,29 +65,16 @@ try{
         ]);
     
         if ($result->getInsertedCount() > 0) {
-            echo "Data inserted successfully!";
+            echo json_encode(["message" => "Data inserted successfully!"]);
         } else {
-            echo "Failed to insert data.";
+            http_response_code(500);
+            echo json_encode(["message" => "Failed to insert data."]);
         }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["message" => "Server error: " . $e->getMessage()]);
     }
-    
-    // Sanitize string input
-    function sanitizeString($input) {
-        $input = trim($input); // Remove extra spaces
-        $input = strip_tags($input); // Remove HTML tags
-        $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8'); // Escape special characters
-        return $input;
-    }
-    
-    // Sanitize and validate specific input types
-    function sanitizeInput($input) {
-        $input = trim($input);
-        $input = strip_tags($input);
-        $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
-        return $input;
-    }
-
-}catch (Exception $e) {
-    //echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
 }
+
+
 ?>
