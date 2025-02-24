@@ -26,19 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the raw POST data
     $data = json_decode(file_get_contents("php://input"), true);
 
-    // Validate input
-    if (isset($_FILES['photos[]'])) {
-        $image = $_FILES['photos[]'];
-
-        // Validate that name and image are not empty
-        if (!empty($image['tmp_name'])) {
-            // Read the image file
-            $imageData = file_get_contents($image['tmp_name']);
+    if($_FILES){
+        $name = $_FILES['photos[]']['name'];
+        move_uploaded_file($_FILES['photos[]']['tmp_name'], $name);
+        echo "uploaded image '$name'<br><img src='$name'>";
+    
         
 
     // Insert data into MongoDB
     $result = $collection->insertOne([
-        'photos' => new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC),
+       // 'photos' => new MongoDB\BSON\Binary($imageData, MongoDB\BSON\Binary::TYPE_GENERIC),
         'animalType' =>$_POST['animalType'],
         'breed' =>$_POST['breed'],
         'name' =>$_POST['name'],
@@ -53,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }} else {
         echo json_encode(['status' => 'error', 'message' => 'Failed to submit surrender']);
     }
-}}else {
+}else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }
 }catch (Exception $e) {

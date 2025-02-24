@@ -1203,18 +1203,20 @@
 
     const formData = new FormData(this);
     const fileInput = document.getElementById('petPhotos'); // Get the file input element
-    const files = fileInput.files;
+   // const files = fileInput.files;
     
-    
-    
+    if (fileInput.files.length === 0) {
+        alert("Please select at least one photo.");
+        return;
+    }
 
     // Clear any existing files from FormData
    // formData.delete('photos[]');
     
     // Add each file to FormData
-    for (let i = 0; i < files.length; i++) {
+   /* for (let i = 0; i < files.length; i++) {
         formData.append('photos[]', files[i]);
-    }
+    }*/
 
     fetch('https://plankton-app-2evxj.ondigitalocean.app/api/surrender.php', {
         method: 'POST',
