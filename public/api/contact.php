@@ -30,6 +30,9 @@ try{
      }
      if (isset($_POST['email'])) {
          $email = sanitizeString($_POST['email']);
+         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Invalid email address!");
+        }
      }
      if (isset($_POST['phone'])) {
          $phone = sanitizeString($_POST['phone']);
@@ -99,6 +102,6 @@ try{
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }*/
 }catch (Exception $e) {
-    echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
+   // echo json_encode(['status' => 'error', 'message' => 'An error occurred: ' . $e->getMessage()]);
 }
 ?>
