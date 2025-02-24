@@ -6,13 +6,9 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 // Include Composer autoload
 require __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../db.php';
 
 use MongoDB\Client;
-
-// MongoDB connection
-$mongoUri = "mongodb+srv://doadmin:73F5a4nuJ8LY92d1@animalrescue-database-09b50270.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=animalrescue-database";
-$databaseName = "animalrescue"; // database name
-
 //Connect to MongoDB
 $client = new Client($mongoUri);
 $collection = $client->animalrescue->adoptions;

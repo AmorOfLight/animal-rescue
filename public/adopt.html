@@ -870,16 +870,23 @@
     document.getElementById('adoptionForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const form = document.getElementById('adoptionForm');
+   // const form = document.getElementById('adoptionForm');
     const formData = new FormData(form);
 
     fetch('https://plankton-app-2evxj.ondigitalocean.app/api/adopt.php', {
       method: 'POST',
       body: formData,
     })
-      .then(response => response.json())
-      .then(result => alert(result.message))
-      .catch(error => console.error('Error:', error));
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw err; });
+        }
+        return response.json();
+    })
+    .then(result => alert(result.message))
+    .catch(error => {
+        alert(error.message || 'An error occurred. Please try again.');
+    });
   });
     </script>
 
