@@ -871,7 +871,7 @@
     e.preventDefault();
 
    // const form = document.getElementById('adoptionForm');
-    const formData = new FormData(form);
+    const formData = new FormData(this);
 
     fetch('https://plankton-app-2evxj.ondigitalocean.app/api/adopt.php', {
       method: 'POST',
