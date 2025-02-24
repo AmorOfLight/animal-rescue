@@ -1185,16 +1185,8 @@
                 body: formData
             })
             .then(response => response.json())
-            .then(result => {
-                alert(result.message);
-                if (result.success) {
-                    this.reset();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while sending your message.');
-            });
+            .then(result => alert(result.message))
+            .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
