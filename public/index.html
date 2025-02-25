@@ -922,11 +922,11 @@
                     <p>Help us find a new home for your pet</p>
                 </div>
                 
-                <form method="post" class="give-animal-form" id="give-animal-form" action="surrender.php" enctype="multipart/form-data">
+                <form method="post" class="give-animal-form" id="give-animal-form" enctype="multipart/form-data">
                     <div class="photo-upload">
                         <h3>Upload Photos</h3>
                         <div class="upload-container" id="upload">
-                            <input type="file" id="petPhotos" name="photos[]" multiple accept="image/*">
+                            <input type="file" id="petPhotos" name="photos[]" multiple accept="image/*" required>
                             <label for="petPhotos">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <span>Drop photos here or click to upload</span>
