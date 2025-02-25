@@ -1203,7 +1203,6 @@
 
     const formData = new FormData(this);
     const fileInput = document.getElementById('petPhotos'); // Get the file input element
-   // const files = fileInput.files;
     
     if (fileInput.files.length === 0) {
         alert("Please select at least one photo.");
@@ -1222,17 +1221,15 @@
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(result => {
-        alert(result.message);
-        if (result.success) {
-            document.getElementById('give-animal-form').reset();
-            document.getElementById('photoPreview').innerHTML = '';
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw err; });
         }
+        return response.json();
     })
+    .then(result => alert(result.message))
     .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the form.');
+        alert(error.message || 'An error occurred. Please try again.');
     });
 });
 
