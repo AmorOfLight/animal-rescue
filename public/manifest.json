@@ -12,13 +12,13 @@
 "orientation": "any",
 "icons": [
     {
-        "src": "/public/an-01-mjE276BopBTy1xjp.png",
+        "src": "an-01-mjE276BopBTy1xjp.png",
         "sizes": "512x512",
         "type": "image/png",
         "purpose": "maskable"
     },
     {
-        "src": "/public/ani logo.png",
+        "src": "ani logo.png",
         "sizes": "192x192",
         "type": "image/png",
         "purpose": "any"
