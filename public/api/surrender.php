@@ -4,6 +4,9 @@ header("Access-Control-Allow-Origin: https://plankton-app-2evxj.ondigitalocean.a
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+// Rest of your PHP code
 
 // Include Composer autoload
 require __DIR__ . '/../../vendor/autoload.php';
@@ -20,12 +23,16 @@ $client = new Client($mongoUri);
 $collection = $client->animalrescue->surrenders;
 
 // Sanitize string input
-function sanitizeString($input) {
+/*function sanitizeString($input) {
     $input = trim($input);
     $input = strip_tags($input);
     $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');
     return $input;
-}
+}*/
+
+function sanitizeString($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+  }
   
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -75,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // Validate MIME type using finfo
+        // Validate MIME type
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $detectedMime = finfo_file($finfo, $tmpFilePath);
         finfo_close($finfo);
@@ -85,10 +92,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // Read file content
-        $imageData[] = file_get_contents($tmpFilePath);
+        // Save file to server
+        $targetDir = "uploads/";
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        $fileName = uniqid() . '_' . basename($uploadedFiles['name'][$i]);
+        move_uploaded_file($tmpFilePath, $targetDir . $fileName);
+        $filePaths[] = $targetDir . $fileName;
     }
 
+    
     // Sanitize inputs (adjust sanitizeString as needed)
     $type = sanitizeString($_POST['animalType'] ?? '');
     $breed = sanitizeString($_POST['breed'] ?? '');
@@ -100,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Insert into MongoDB
         $result = $collection->insertOne([
-            'photos' => $imageData,
+            'photos' => $filePaths, // Store paths instead of binary data
             'animalType' => $type,
             'breed' => $breed,
             'name' => $name,
