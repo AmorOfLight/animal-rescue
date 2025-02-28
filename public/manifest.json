@@ -1,8 +1,8 @@
 {
 
 "name": "Animal Shelter",
-"short_name": "A-Shelter",
-"start_url": "The URL that should be loaded when your application is opened",
+"short_name": "AnimalShelter",
+"start_url": "/index.html",
 "display": "standalone",
 "description": "A description for your application",
 "lang": " The default language of your application",
@@ -20,6 +20,18 @@
     {
         "src": "ani logo.png",
         "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+    },
+    {
+        "src": "an-01-mjE276BopBTy1xjp.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any"
+    },
+    {
+        "src": "ani logo.png",
+        "sizes": "368x347",
         "type": "image/png",
         "purpose": "any"
     }
